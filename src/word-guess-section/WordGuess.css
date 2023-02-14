@@ -1,0 +1,18 @@
+body {
+}
+.letter-array-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+.letter-array-letter {
+  display: flex;
+  justify-content: center;
+  border-style: double;
+  padding: 1rem;
+}
+.filtered-array-container {
+  /* display: grid;
+  grid-template-columns: repeat(8, 1fr); */
+  /* grid-template-rows: repeat(2, 1fr); */
+}

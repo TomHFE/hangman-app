@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import WordGuess from "../word-guess-section/WordGuess";
 
 export default function WordGenerator() {
   // id hook
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(3);
   // data store hook
   const [movie, setMovie] = useState([]);
 
@@ -30,6 +31,7 @@ export default function WordGenerator() {
     const dataSecond = await resSecond.json();
     // set movie hook to data
     setMovie(dataSecond);
+    console.log(movie);
   };
   // random number converter
   const RandomNumber = () => {
@@ -48,9 +50,16 @@ export default function WordGenerator() {
         <p>{movie.overview}</p>
 
         <div>
-          {/* {movie.genres.map((genre) => {
-            return <div>{genre.name}</div>;
-          })} */}
+          <WordGuess
+            key={movie.id}
+            title={movie.title}
+            tagline={movie.tagline}
+            overview={movie.overview}
+            genres={movie.genres}
+            release_date={movie.release_date}
+            backdrop_path={movie.backdrop_path}
+            id={movie.id}
+          />
         </div>
       </div>
     </div>
