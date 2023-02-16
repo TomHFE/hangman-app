@@ -1,17 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import React from "react";
 import WordGuess from "../word-guess-section/WordGuess";
+import AppContext from "../app-context/AppContext";
 
 export default function WordGenerator() {
   // id hook
   const [id, setId] = useState(3);
   // data store hook
   const [movie, setMovie] = useState([]);
+  // help hook
+  const [click, setClick] = useState(false);
+  const helpRef = useRef(false);
+  // highscore provider
+  const Context = useContext(AppContext);
 
   // movie api called and rerendered depending on id
   useEffect(() => {
     RequestMovies(id);
   }, [id]);
+  // random number useeffect
+  useEffect(() => {
+    RandomNumber();
+  }, []);
 
   // request movie api
   const RequestMovies = async (id) => {
@@ -31,7 +41,6 @@ export default function WordGenerator() {
     const dataSecond = await resSecond.json();
     // set movie hook to data
     setMovie(dataSecond);
-    console.log(movie);
   };
   // random number converter
   const RandomNumber = () => {
@@ -41,22 +50,40 @@ export default function WordGenerator() {
     setId(number);
   };
 
+  // help display conditional statement
+  let HelpDisplay = click && (
+    <p>
+      Press the buttons to try and guess the name of the movie as you lose lives
+      you will be given clues to help you guess if its to hard press Refresh to
+      fetch a new film
+    </p>
+  );
+
   return (
     <div>
-      <h1 onClick={RandomNumber}>click</h1>
+      {/* random number */}
+      <h1 onClick={RandomNumber}>Refresh</h1>
+      {/* high score */}
+      <h1>High Score: {Context.highScore}</h1>
       <div>
-        <h2>{movie.title}</h2>
-        <h2>{movie.tagline}</h2>
-        <p>{movie.overview}</p>
-
         <div>
+          {/* help display */}
+          <h1
+            onClick={() => {
+              setClick(!click);
+            }}
+          >
+            ?
+          </h1>
+          <div>{HelpDisplay}</div>
+        </div>
+        <div>
+          {/* word guess component */}
           <WordGuess
             key={movie.id}
             title={movie.title}
             tagline={movie.tagline}
             overview={movie.overview}
-            genres={movie.genres}
-            release_date={movie.release_date}
             backdrop_path={movie.backdrop_path}
             id={movie.id}
           />
@@ -65,4 +92,3 @@ export default function WordGenerator() {
     </div>
   );
 }
-// change api

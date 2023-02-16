@@ -1,12 +1,19 @@
-export default function ClueGenerator({ clue1, clue2, clue3, trys }) {
+import { useState } from "react";
+import { Navigate } from "react-router";
+
+export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
+  const [clueOne, setClueOne] = useState("?");
+  const [clueTwo, setClueTwo] = useState("?");
+  const [clueThree, setClueThree] = useState("?");
+
   // `https://image.tmdb.org/t/p/w500/`;
 
-  console.log(clue2);
   const ClueCount = function (prop) {
-    prop = [{ clue1, clue2, clue3, trys }];
-    console.log(prop);
-    console.log(clue1);
-    if (trys >= 3 && trys <= 5) {
+    prop = [{ clue1, clue2, clue3, lives }];
+    // console.log(lives);
+    console.log(lives);
+
+    if (lives >= 3 && lives <= 5) {
       return (
         <div>
           <img
@@ -18,7 +25,7 @@ export default function ClueGenerator({ clue1, clue2, clue3, trys }) {
           <h3>?</h3>
         </div>
       );
-    } else if (trys >= 6 && trys <= 8) {
+    } else if (lives >= 6 && lives <= 8) {
       return (
         <div>
           <img
@@ -30,7 +37,7 @@ export default function ClueGenerator({ clue1, clue2, clue3, trys }) {
           <h3>?</h3>
         </div>
       );
-    } else if (trys >= 9) {
+    } else if (lives >= 9 && lives <= 11) {
       return (
         <div>
           <img
@@ -42,7 +49,7 @@ export default function ClueGenerator({ clue1, clue2, clue3, trys }) {
           <h3>{clue3}</h3>
         </div>
       );
-    } else {
+    } else if (lives < 3) {
       return (
         <div>
           <h3>?</h3>
@@ -50,12 +57,30 @@ export default function ClueGenerator({ clue1, clue2, clue3, trys }) {
           <h3>?</h3>
         </div>
       );
+    } else {
+      return (
+        <div>
+          <Navigate to="/lost" />
+          {/* <LosePage/> */}
+        </div>
+      );
     }
   };
 
   return (
     <div>
-      <ClueCount clue1={clue1} clue2={clue2} clue3={clue3} trys={trys} />{" "}
+      {/* {lives >= 10 ? (
+        <div>
+          <div>you lost</div>
+        </div>
+      ) : (
+        <div>
+          <div>{clueOne}</div>
+          <div>{clueOne}</div>
+          <div>{clueOne}</div>
+        </div>
+      )} */}
+      <ClueCount clue1={clue1} clue2={clue2} clue3={clue3} lives={lives} />{" "}
     </div>
   );
 }

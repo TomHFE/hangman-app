@@ -1,22 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { Navigate } from "react-router";
 import ClueGenerator from "../clue-generator/ClueGenerator";
 import "./WordGuess.css";
+import AppContext from "../app-context/AppContext";
+import LifeLeft from "../lives-section/LifeLeft";
 
 export default function WordGuess({
+  // api props
   title,
   tagline,
   overview,
-  genres,
-  release_date,
   backdrop_path,
   id,
 }) {
+  // letter hook
   const [letter, setLetter] = useState("");
-  const [blankArray, setBlankArray] = useState(["t", "e"]);
-  const [fullArray, setFullArray] = useState(["t", "e"]);
+  // blank array hook
+  const [blankArray, setBlankArray] = useState([
+    "press a button ",
+    "to initialise",
+  ]);
+  // full word hook
+  const [fullArray, setFullArray] = useState([
+    "press a button ",
+    "to initialise",
+  ]);
+  // final array/display hook
   const [finalArray, setFinalArray] = useState([]);
+  //
   const [trys, setTrys] = useState(0);
-
+  const [score, setScore] = useState(0);
+  const LifeRef = useRef(0);
+  const IndexRef = useRef(false);
+  const Context = useContext(AppContext);
   const letterArray = [
     "a",
     "b",
@@ -54,24 +70,33 @@ export default function WordGuess({
     "8",
     "9",
   ];
-
+  useEffect(() => {
+    LifeRef.current = 0;
+  }, [fullArray]);
   useEffect(() => {
     FilterLetters(title);
   }, [title]);
   useEffect(() => {
     CheckFilteredLetters(letter);
+    changeHighScore();
   }, [letter]);
   useEffect(() => {
     NewDisplay();
   }, [trys]);
+  useEffect(() => {
+    if (IndexRef.current === true) {
+      CheckLives();
+    }
+    return () => {
+      IndexRef.current = false;
+    };
+  }, [letter]);
 
   const FilterLetters = function (title = "test") {
     let titleArray = [];
     let blankTitle = [];
-    // convert to try catch
     let arg = title.toLowerCase();
     titleArray = Array.from(arg);
-    console.log(titleArray);
     blankTitle = titleArray.map((el) => (el === " " ? (el = " ") : (el = "_")));
 
     setBlankArray(blankTitle);
@@ -79,66 +104,86 @@ export default function WordGuess({
   };
 
   const CheckFilteredLetters = function (letter) {
-    console.log(trys);
     const indexes = fullArray.reduce((accumulator, current, index) => {
       if (current === letter) {
         accumulator.push(index);
       }
       return accumulator;
     }, []);
-    console.log(indexes);
+    if (indexes.length === 0) {
+      IndexRef.current = true;
+    }
     indexes.map((el) => {
       blankArray.splice(el, 1, letter);
     });
     setFinalArray(blankArray);
-    console.log(finalArray);
     return finalArray;
   };
   const NewDisplay = function () {
+    setScore(11 - LifeRef.current);
     return (
       <div>
-        <h2>{finalArray}</h2>
+        <h2>{finalArray.join(" ")}</h2>
       </div>
     );
   };
 
+  const CheckLives = function () {
+    LifeRef.current = LifeRef.current + 1;
+  };
+  function changeHighScore() {
+    if (finalArray.join("") === fullArray.join("")) {
+      if (Context.highScore < 11 - LifeRef.current) {
+        Context.setHighScore(11 - LifeRef.current);
+      }
+    }
+  }
+
   return (
     <div>
-      <div className="letter-array-container" key={id}>
-        {letterArray.map((el) => {
-          return (
-            <div key={el}>
-              <h4
-                className={`letter-array-letter`}
-                key={el}
-                name={el}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setLetter(e.target.innerHTML);
-                  setTrys(trys + 1);
-                  console.log(trys);
-                }}
-                onMouseUp={() => {
-                  CheckFilteredLetters(letter);
-                }}
-              >
-                {el}
-              </h4>
-            </div>
-          );
-        })}
-      </div>
-
-      <div>
-        <NewDisplay />{" "}
-        <ClueGenerator
-          key={trys}
-          clue1={backdrop_path}
-          clue2={tagline}
-          clue3={overview}
-          trys={trys}
-        />
-      </div>
+      {finalArray.join("") === fullArray.join("") ? (
+        <div>
+          <Navigate to="./won" score={score} />
+        </div>
+      ) : (
+        <div>
+          <div className="letter-array-container" key={id}>
+            {letterArray.map((el) => {
+              return (
+                <div key={el}>
+                  <h4
+                    className={`letter-array-letter`}
+                    key={el}
+                    name={el}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      setLetter(e.target.innerHTML);
+                    }}
+                    onMouseUp={(e) => {
+                      e.preventDefault();
+                      setTrys(trys + 1);
+                      CheckFilteredLetters(letter);
+                    }}
+                  >
+                    {el}
+                  </h4>
+                </div>
+              );
+            })}
+          </div>
+          <LifeLeft key={score} score={score} life={LifeRef.current} />
+          <div>
+            <NewDisplay />
+            <ClueGenerator
+              key={trys}
+              clue1={backdrop_path}
+              clue2={tagline}
+              clue3={overview}
+              lives={LifeRef.current}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
