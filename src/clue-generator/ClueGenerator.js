@@ -1,19 +1,14 @@
-import { useState } from "react";
 import { Navigate } from "react-router";
 
 export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
-  const [clueOne, setClueOne] = useState("?");
-  const [clueTwo, setClueTwo] = useState("?");
-  const [clueThree, setClueThree] = useState("?");
-
-  // `https://image.tmdb.org/t/p/w500/`;
-
+  // clue function
   const ClueCount = function (prop) {
+    // defractored props
     prop = [{ clue1, clue2, clue3, lives }];
-    // console.log(lives);
-    console.log(lives);
 
+    // 1st clue conditional
     if (lives >= 3 && lives <= 5) {
+      // 1st clue render
       return (
         <div>
           <img
@@ -25,7 +20,10 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
           <h3>?</h3>
         </div>
       );
-    } else if (lives >= 6 && lives <= 8) {
+    }
+    //  2nd clue conditional
+    else if (lives >= 6 && lives <= 8) {
+      // 2nd clue render
       return (
         <div>
           <img
@@ -37,7 +35,10 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
           <h3>?</h3>
         </div>
       );
-    } else if (lives >= 9 && lives <= 11) {
+    }
+    // 3rd clue conditional
+    else if (lives >= 9 && lives <= 11) {
+      // 3rd clue render
       return (
         <div>
           <img
@@ -49,7 +50,10 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
           <h3>{clue3}</h3>
         </div>
       );
-    } else if (lives < 3) {
+    }
+    // default conditional
+    else if (lives < 3) {
+      // default render
       return (
         <div>
           <h3>?</h3>
@@ -57,11 +61,13 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
           <h3>?</h3>
         </div>
       );
-    } else {
+    }
+    // lost conditional
+    else {
+      // lost render
       return (
         <div>
           <Navigate to="/lost" />
-          {/* <LosePage/> */}
         </div>
       );
     }
@@ -69,17 +75,7 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
 
   return (
     <div>
-      {/* {lives >= 10 ? (
-        <div>
-          <div>you lost</div>
-        </div>
-      ) : (
-        <div>
-          <div>{clueOne}</div>
-          <div>{clueOne}</div>
-          <div>{clueOne}</div>
-        </div>
-      )} */}
+      {/* clue count conditional */}
       <ClueCount clue1={clue1} clue2={clue2} clue3={clue3} lives={lives} />{" "}
     </div>
   );
