@@ -8,6 +8,7 @@ import { useState } from "react";
 function App() {
   // high score state
   const [highScore, setHighScore] = useState(0);
+  // components
   return (
     <div className="App">
       <AppContext.Provider value={{ highScore, setHighScore }}>

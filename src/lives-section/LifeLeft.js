@@ -9,11 +9,16 @@ import { state8 as state8 } from "./hangmandrawings/state8.GIF";
 import { state9 as state9 } from "./hangmandrawings/state9.GIF";
 import { state10 as state10 } from "./hangmandrawings/state10.GIF";
 import { state11 as state11 } from "./hangmandrawings/state11.GIF";
+import "../App.css";
 
 export default function LifeLeft({ score, life }) {
   // conditional hangman image render
   let HangeMan = life > 0 && life <= 11 && (
     <div>
+      {/* lives left */}
+      <div>
+        <div>Lives Left: {score} / 11</div>
+      </div>
       <img
         src={require(`./hangmandrawings/state${life}.GIF`)}
         key={life}
@@ -24,8 +29,6 @@ export default function LifeLeft({ score, life }) {
 
   return (
     <div>
-      {/* lives left */}
-      <div>Lives Left: {score} / 11</div>
       {/* hangman gif */}
       <div>{HangeMan}</div>
     </div>

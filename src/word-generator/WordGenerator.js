@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import React from "react";
 import WordGuess from "../word-guess-section/WordGuess";
 import AppContext from "../app-context/AppContext";
+import "../App.css";
 
 export default function WordGenerator() {
   // id hook
@@ -10,7 +11,6 @@ export default function WordGenerator() {
   const [movie, setMovie] = useState([]);
   // help hook
   const [click, setClick] = useState(false);
-  const helpRef = useRef(false);
   // highscore provider
   const Context = useContext(AppContext);
 
@@ -61,22 +61,29 @@ export default function WordGenerator() {
 
   return (
     <div>
-      {/* random number */}
-      <h1 onClick={RandomNumber}>Refresh</h1>
-      {/* high score */}
-      <h1>High Score: {Context.highScore}</h1>
-      <div>
-        <div>
-          {/* help display */}
-          <h1
-            onClick={() => {
-              setClick(!click);
-            }}
-          >
-            ?
-          </h1>
-          <div>{HelpDisplay}</div>
+      <div className="wordgenerator-container">
+        {/* random number */}
+        <h1 className="gen1" onClick={RandomNumber}>
+          Refresh
+        </h1>
+        {/* high score */}
+        <h1 className="gen2">High Score: {Context.highScore}</h1>
+        <div className="gen3">
+          <div>
+            {/* help display */}
+            <h1
+              onClick={() => {
+                setClick(!click);
+              }}
+            >
+              ?
+            </h1>
+            <div>{HelpDisplay}</div>
+          </div>
         </div>
+      </div>
+
+      <div>
         <div>
           {/* word guess component */}
           <WordGuess

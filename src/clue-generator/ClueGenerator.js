@@ -1,4 +1,5 @@
 import { Navigate } from "react-router";
+import "../App.css";
 
 export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
   // clue function
@@ -74,7 +75,7 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
   };
 
   return (
-    <div>
+    <div className="clue-container">
       {/* clue count conditional */}
       <ClueCount clue1={clue1} clue2={clue2} clue3={clue3} lives={lives} />{" "}
     </div>

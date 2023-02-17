@@ -1,0 +1,46 @@
+.wordgenerator-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+.gen1 {
+  display: flex;
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 3;
+}
+.gen2 {
+  display: flex;
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 2;
+}
+.gen3 {
+  display: flex;
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 3;
+}
+
+.wordguess-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  min-height: 10vh;
+}
+.guess1 {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  grid-row: 1;
+  grid-column: 5;
+  margin: 10vw;
+}
+.guess2 {
+  /* display: flex; */
+  justify-content: center;
+  grid-row: 1;
+  grid-column: 1/5;
+  margin: 10vw;
+}
