@@ -54,9 +54,9 @@ export default function WordGenerator() {
   // help display conditional statement
   let HelpDisplay = click && (
     <p className="help">
-      Press the buttons to try and guess the name of the movie as you lose lives
-      you will be given clues to help you guess if its to hard press Refresh to
-      fetch a new film
+      Press the buttons to try and guess the name of the movie, as you lose
+      lives you will be given clues to help you guess. If its to hard press
+      Refresh to fetch a new film
     </p>
   );
 
