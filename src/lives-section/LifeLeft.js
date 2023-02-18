@@ -10,6 +10,7 @@ import { state9 as state9 } from "./hangmandrawings/state9.GIF";
 import { state10 as state10 } from "./hangmandrawings/state10.GIF";
 import { state11 as state11 } from "./hangmandrawings/state11.GIF";
 import "../App.css";
+import "./lives-section.css";
 
 export default function LifeLeft({ score, life }) {
   // conditional hangman image render
@@ -28,7 +29,7 @@ export default function LifeLeft({ score, life }) {
   );
 
   return (
-    <div>
+    <div className="hangman-body">
       {/* hangman gif */}
       <div>{HangeMan}</div>
     </div>

@@ -1,0 +1,28 @@
+/* clue 1 */
+
+.style1 {
+  border-radius: 3%;
+}
+/* clue 2 */
+
+.style2 {
+  padding: 0.6rem;
+  place-items: right;
+  text-align: right;
+  color: orange;
+  font-family: "Rubik Mono One", sans-serif;
+}
+
+/* clue 3 */
+
+.style3 {
+  display: flex;
+  flex-direction: row-reverse;
+  font-family: "Rubik Mono One", sans-serif;
+  place-items: left;
+  text-align: left;
+  font-size: 0.6rem;
+  padding-top: 0.6rem;
+  background-color: rgba(206, 136, 24, 0.528);
+  border-radius: 3%;
+}

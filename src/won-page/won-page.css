@@ -1,0 +1,17 @@
+/* won page */
+
+.won-page {
+  display: flex;
+  height: 50vw;
+  width: 50vw;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 3rem;
+  border-style: groove;
+  border-radius: 0 20% 20% 0;
+  border-width: 2rem;
+  border-color: rgba(255, 166, 0, 0.398);
+}

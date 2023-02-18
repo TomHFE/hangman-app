@@ -1,0 +1,9 @@
+/* hangman */
+
+.hangman-body {
+  background-color: white;
+  padding: 1rem;
+  color: rgb(62, 60, 58);
+  border-radius: 3%;
+  text-shadow: none;
+}

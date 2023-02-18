@@ -1,5 +1,7 @@
 import { Navigate } from "react-router";
 import "../App.css";
+import LostPage from "../lost-page/LostPage";
+import "./clue-generator.css";
 
 export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
   // clue function
@@ -16,9 +18,10 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
             src={`https://image.tmdb.org/t/p/w500/${clue1}`}
             alt="poster"
             key={clue1}
+            className="clue1 style1"
           />
-          <h3>?</h3>
-          <h3>?</h3>
+          <h3 className="clue2 ">?</h3>
+          <h3 className="clue3 ">?</h3>
         </div>
       );
     }
@@ -31,9 +34,9 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
             src={`https://image.tmdb.org/t/p/w500/${clue1}`}
             alt="poster"
             key={clue1}
+            className="clue1 style1"
           />
-          <h3>{clue2}</h3>
-          <h3>?</h3>
+          <h3 className="clue2 style2">{clue2}</h3>
         </div>
       );
     }
@@ -46,9 +49,9 @@ export default function ClueGenerator({ clue1, clue2, clue3, lives }) {
             src={`https://image.tmdb.org/t/p/w500/${clue1}`}
             alt="poster"
             key={clue1}
+            className="clue1 style1"
           />
-          <h3>{clue2}</h3>
-          <h3>{clue3}</h3>
+          <h3 className="clue3 style3 ">{clue3}</h3>
         </div>
       );
     }

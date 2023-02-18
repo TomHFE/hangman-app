@@ -1,3 +1,4 @@
+/* letter array */
 .letter-array-container {
   display: grid;
   grid-template-columns: repeat(15, 1fr);
@@ -7,4 +8,34 @@
   display: flex;
   justify-content: center;
   padding: 0.3rem;
+}
+.letters {
+  background-color: rgb(43, 44, 44);
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+/* alphabet array */
+.alphabet {
+}
+.letter:hover {
+  color: orange;
+  border-style: double;
+  border-radius: 3%;
+  background-color: rgba(43, 44, 44, 0.323);
+  /* padding-left: 0.6rem;
+  padding-right: 0.6rem; */
+  max-height: fit-content;
+  width: fit-content;
+  block-size: fit-content;
+}
+/* final array */
+.final-array {
+  color: orange;
+  border-style: double;
+
+  max-height: fit-content;
+  width: fit-content;
+  block-size: fit-content;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
 }

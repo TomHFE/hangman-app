@@ -3,6 +3,7 @@ import React from "react";
 import WordGuess from "../word-guess-section/WordGuess";
 import AppContext from "../app-context/AppContext";
 import "../App.css";
+import "./word-generator.css";
 
 export default function WordGenerator() {
   // id hook
@@ -52,7 +53,7 @@ export default function WordGenerator() {
 
   // help display conditional statement
   let HelpDisplay = click && (
-    <p>
+    <p className="help">
       Press the buttons to try and guess the name of the movie as you lose lives
       you will be given clues to help you guess if its to hard press Refresh to
       fetch a new film

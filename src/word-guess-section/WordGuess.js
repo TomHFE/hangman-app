@@ -83,6 +83,9 @@ export default function WordGuess({
     "7",
     "8",
     "9",
+    ".",
+    "-",
+    "/",
   ];
 
   // useEffect hooks
@@ -199,12 +202,12 @@ export default function WordGuess({
   return (
     <div>
       <div className="wordguess-container">
-        <div className="guess1">
+        <div className="guess1 alphabet">
           <div className="letter-array-container " key={id}>
             {/* letter array map */}
             {letterArray.map((el) => {
               return (
-                <div key={el}>
+                <div key={el} className={"letter"}>
                   <h4
                     className={`letter-array-letter`}
                     key={el}
@@ -230,23 +233,27 @@ export default function WordGuess({
           </div>
         </div>
         {/* display component */}
-        <div className="guess2">
+        <div className="guess2 final-array">
           <h2>{finalArray.join(" ")}</h2>
         </div>
       </div>
 
-      <div>
-        {/* life left component */}
-        <LifeLeft key={score} score={score} life={LifeRef.current} />
+      <div className="clue-life-container">
+        <div className="cl1">
+          {/* life left component */}
 
-        {/* clue generate component */}
-        <ClueGenerator
-          key={trys}
-          clue1={backdrop_path}
-          clue2={tagline}
-          clue3={overview}
-          lives={LifeRef.current}
-        />
+          <LifeLeft key={score} score={score} life={LifeRef.current} />
+        </div>
+        <div className="cl2">
+          {/* clue generate component */}
+          <ClueGenerator
+            key={trys}
+            clue1={backdrop_path}
+            clue2={tagline}
+            clue3={overview}
+            lives={LifeRef.current}
+          />
+        </div>
       </div>
     </div>
   );
